@@ -61,7 +61,7 @@ func (m *realTidbDiscoveryManager) Reconcile(obj client.Object) error {
 	switch cluster := obj.(type) {
 	case *v1alpha1.TidbCluster:
 		// If PD is not specified return
-		if cluster.Spec.PD == nil && !cluster.AcrossK8s() {
+		if cluster.Spec.PD == nil && !cluster.AcrossK8s() { //pd为空的话，需要tidb是跨集群部署
 			return nil
 		}
 		clusterPolicyRule = rbacv1.PolicyRule{
